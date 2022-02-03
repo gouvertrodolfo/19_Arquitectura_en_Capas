@@ -1,6 +1,6 @@
-import { contenedor as Usuarios } from '../daos/Usuarios.js';
-import bCrypt from 'bcrypt';
-import logger from '../logger.js'
+const Usuarios  = require('../daos/Usuarios.js');
+const bCrypt = require('bcrypt');
+const logger = require('../logger.js');
 
 async function buscarXUsername( username) 
 {
@@ -67,4 +67,4 @@ function createHash(password) {
 }
 
 
-export {registrarUsuario, loginUsuario, buscarXUsername}
+module.exports = {registrarUsuario, loginUsuario, buscarXUsername}

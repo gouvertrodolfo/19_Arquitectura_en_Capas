@@ -1,16 +1,20 @@
 const { MongoClient, ObjectId } = require('mongodb');
 const logger = require('../../logger.js')
 
-const mongo_url = process.env.MONGO_URL 
+const {database} = require("../../../options/mongoDB");
 
-const client = new MongoClient(mongo_url, { serverSelectionTimeOutMS: 5000 });
-await client.connect();
-logger.info('Contenedor Mongo Base conectada')
+const stringConection = database.url.replace('<username>', process.env.MONGO_DB_USER).replace('<password>', process.env.MONGO_DB_PASSWORD)
+
 
 class Mongo {
 
     constructor(base, collection) {
+        const client = new MongoClient(stringConection, { serverSelectionTimeOutMS: 10000 });
+
+        client.connect();   
+        
         this.collection = client.db(base).collection(collection)
+                
     }
 
     // save(Object): Number - Recibe un objeto, lo guarda en el archivo, devuelve el id asignado.
@@ -64,4 +68,4 @@ class Mongo {
 
 }
 
-export default Mongo
+module.exports =  Mongo

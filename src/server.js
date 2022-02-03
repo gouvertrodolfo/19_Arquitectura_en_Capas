@@ -70,7 +70,7 @@ if (args.mode === 'cluster' && cluster.isPrimary) {
     const { apiRandom } = require("./routes/apiRandom")
 
     const routes = require('./routes/routes');
-    const { passport } = require("./routes/apiProductos/MyPassportLocal")
+    const { passport } = require("./routes/middelware/PassportLocal")
     const controllersdb = require('./daos/mongoose');
 
     /**************************************************************************************** */

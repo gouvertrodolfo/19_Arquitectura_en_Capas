@@ -1,4 +1,4 @@
-import {buscarXUsername } from '../api/Usuario.js'
+const {buscarXUsername } = require( '../api/Usuario')
 
 
 async function buscar( username ) 
@@ -7,4 +7,4 @@ async function buscar( username )
     return user;
 }
 
-export {buscar}
+module.exports = {buscar}

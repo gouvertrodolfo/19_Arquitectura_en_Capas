@@ -1,12 +1,12 @@
-import passport from 'passport';
-import { Strategy as LocalStrategy } from 'passport-local';
+const passport = require('passport');
+const { Strategy  } = require('passport-local');
 
-import {SignUp, login} from '../../controller/login.js'
-import {buscar} from '../../controller/usuarios.js'
+const {SignUp, login} = require('../../controller/login.js');
+const {buscar} =require('../../controller/usuarios.js')
 
-passport.use('signup', new LocalStrategy({ passReqToCallback: true},  SignUp ))
+passport.use('signup', new Strategy({ passReqToCallback: true},  SignUp ))
 
-passport.use('login', new LocalStrategy( login ));
+passport.use('login', new Strategy( login ));
 
 
 passport.serializeUser(function (user, done) {
@@ -28,4 +28,4 @@ function isAuth(req, res, next) {
   }
 
 
-export { passport, isAuth };
+module.exports = { passport, isAuth };

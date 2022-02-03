@@ -1,4 +1,4 @@
-import Market from '../api/Market.js';
+const Market = require('../api/Market.js');
 const market = new Market();
 
 async function listarTodo(req, res) {
@@ -32,10 +32,10 @@ function actualizar(req, res) {
     res.json(producto)
 }
 
-function borrar (req, res) {
+function borrar(req, res) {
     const { id } = req.params
     const array = market.delProducto(id)
     res.json(array)
-  }
+}
 
-export { listarTodo, buscarxId, crear, actualizar, borrar }
+module.exports ={ listarTodo, buscarxId, crear, actualizar, borrar }

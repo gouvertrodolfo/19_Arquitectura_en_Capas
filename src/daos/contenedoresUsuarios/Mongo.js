@@ -1,5 +1,5 @@
-import Contenedor from '../contenedores/Mongo.js';
-import logger from '../../logger.js'
+const Contenedor = require ('../contenedores/Mongo.js');
+const logger =require ('../../logger.js')
 
 class Mongo extends Contenedor {
 
@@ -45,8 +45,7 @@ class Mongo extends Contenedor {
 function getInstancia()
 {
     const instacia = new Mongo()
-    logger.info('instancia contenedor de usuarios Mongo')
     return instacia;
 }
 
-export  {getInstancia};
+module.exports=  {getInstancia};

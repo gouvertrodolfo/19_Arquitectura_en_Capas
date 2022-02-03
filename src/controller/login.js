@@ -1,4 +1,4 @@
-import {registrarUsuario, loginUsuario } from '../api/Usuario.js'
+const {registrarUsuario, loginUsuario } = require('../api/Usuario.js')
 
 function SignUp(req, username, password, done){
 
@@ -40,4 +40,4 @@ function getlogoutController(req, res) {
     res.status(200).json({'status':'ok'})
 }
 
-export { SignUp, login, postLoginController, postSignupController, getfailloginController, getfailsignupController, getlogoutController }
+module.exports = { SignUp, login, postLoginController, postSignupController, getfailloginController, getfailsignupController, getlogoutController }
