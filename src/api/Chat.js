@@ -18,8 +18,9 @@ class Chat {
     async AddMensaje(data) {
 
         data.fechayhora = moment(new Date()).format('DD/MM/YYYY HH:MM:SS');
+        await contenedor.create(data)
 
-        return await contenedor.create(data)
+        return await contenedor.getAll()
     }
 
 }

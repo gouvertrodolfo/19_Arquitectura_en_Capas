@@ -50,6 +50,7 @@ socket.on('mensajes', async msjs => {
 
     const mensajes = normalizr.denormalize(msjs.result, mensajes_schema, msjs.entities)
 
+console.log(mensajes)
     const plantilla = await buscarPlantillaMensajes()
     const html = armarHTML(plantilla, mensajes)
     document.getElementById('messages').innerHTML = html;

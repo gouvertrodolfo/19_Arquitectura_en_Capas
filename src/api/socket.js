@@ -48,9 +48,11 @@ class mySocket{
 
             /* Escucho los mensajes enviado por el cliente y se los propago a todos */
             socket.on('nuevoMensaje', async data => {
-
+console.log('nuevoMensaje')
                 mensajes = await chat.AddMensaje(data)
+console.log(mensajes)
                 const mensajes_normal = normalizr.normalize(mensajes, mensajes_schema)
+console.log(mensajes_normal)
 
                 this.io.sockets.emit('mensajes', mensajes_normal)
             })

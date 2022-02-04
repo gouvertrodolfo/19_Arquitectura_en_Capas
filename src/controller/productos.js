@@ -1,41 +1,42 @@
-const Market = require('../api/Market.js');
-const market = new Market();
+const inventario = require("../api/Productos").getInstancia();
 
-async function listarTodo(req, res) {
-    const array = await market.getAllProductos()
+async function listar(req, res) {
+    const array = await inventario.getAll();
     res.json(array);
-}
+};
 
-async function buscarxId(req, res) {
-    const id = req.params.id
-
-    const producto = await market.getProductobyId(id)
+async function buscar(req, res) {
+    const { id } = req.params
+    const producto = await inventario.getById(id)
 
     if (producto == undefined) {
         res.status(404).json({ error: 'producto no encontrado' })
     }
     else {
-        res.json(producto)
+        res.status(200).json(producto)
     }
-};
+}
 
 async function crear(req, res) {
-    let object = req.body
-    const producto = market.addProducto(object)
+    let producto = req.body
+    const id = await inventario.save(producto)
+    producto = await inventario.getById(id)
     res.json(producto)
 }
 
-function actualizar(req, res) {
+async function actualizar(req, res) {
     const { id } = req.params
     let data = req.body
-    const producto = market.updateProducto(id, data)
+
+    await inventario.update(id, data)
+    const producto = await inventario.getById(id)
     res.json(producto)
 }
 
-function borrar(req, res) {
+async function borrar(req, res) {
     const { id } = req.params
-    const array = market.delProducto(id)
-    res.json(array)
+    await inventario.deleteById(id)
+    res.json({ borrado: "Ok" })
 }
 
-module.exports ={ listarTodo, buscarxId, crear, actualizar, borrar }
+module.exports = { listar, buscar, crear, actualizar, borrar }
