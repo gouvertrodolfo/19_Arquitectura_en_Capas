@@ -1,6 +1,6 @@
 const Usuarios  = require('../daos/Usuarios.js');
 const bCrypt = require('bcrypt');
-const logger = require('../logger.js');
+const {logger} = require('../logger')
 
 async function buscarXUsername( username) 
 {

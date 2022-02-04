@@ -1,5 +1,5 @@
-const Contenedor = require ('../contenedores/Mongo.js');
-const logger =require ('../../logger.js')
+const Contenedor = require('../contenedores/Mongo.js');
+const { logger } = require('../../logger.js')
 
 class Mongo extends Contenedor {
 
@@ -42,10 +42,9 @@ class Mongo extends Contenedor {
 
 }
 
-function getInstancia()
-{
+function getInstancia() {
     const instacia = new Mongo()
     return instacia;
 }
 
-module.exports=  {getInstancia};
+module.exports = { getInstancia };

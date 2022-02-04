@@ -1,5 +1,5 @@
 const { MongoClient, ObjectId } = require('mongodb');
-const logger = require('../../logger.js')
+const {logger} = require('../../logger.js')
 
 const {database} = require("../../../options/mongoDB");
 
