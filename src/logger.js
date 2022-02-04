@@ -47,4 +47,4 @@ if (process.env.NODE_ENV === 'PROD') {
 }
 
 
-exports.logger = logger;
+module.exports = {logger};

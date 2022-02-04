@@ -4,7 +4,7 @@ const logger =require ('../../logger.js')
 class Mongo extends Contenedor {
 
     constructor() {
-        super('eCommerce', 'usuarios');
+        super('usuarios');
     }
 
     async getByUserName(username) {

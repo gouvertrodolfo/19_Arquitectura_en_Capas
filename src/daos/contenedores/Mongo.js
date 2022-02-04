@@ -8,12 +8,12 @@ const stringConection = database.url.replace('<username>', process.env.MONGO_DB_
 
 class Mongo {
 
-    constructor(base, collection) {
+    constructor( collection) {
         const client = new MongoClient(stringConection, { serverSelectionTimeOutMS: 10000 });
 
         client.connect();   
         
-        this.collection = client.db(base).collection(collection)
+        this.collection = client.db(process.env.MONGO_DB).collection(collection)
                 
     }
 

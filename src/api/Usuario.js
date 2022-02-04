@@ -27,7 +27,7 @@ async function registrarUsuario( user, callback )
             return callback(null, usuarioReg);
         }
         catch (err) {
-            logger.error(`Error in Saving user: ${err}`);
+            logger.info(`Error in Saving user: ${err}`);
             return callback(err);
         }
 
