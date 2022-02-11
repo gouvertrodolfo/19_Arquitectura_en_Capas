@@ -1,8 +1,9 @@
 const Productos = require("../api/Productos")
 
  async function listar(req, res) {
-    const array = await Productos.listar()
-    res.json(array);
+    const items = await Productos.listar()
+    const title = 'Productos'
+    res.render('pages/index', {user:res.user, titulo:title , productos:items})
 }
 
 async function buscar(req, res) {
@@ -18,7 +19,9 @@ async function buscar(req, res) {
 async function crear(req, res) {
     let object = req.body
     const producto = await Productos.crear(object)
-    res.status(200).json(producto.export())
+    socket.emit('productos', producto)
+    res.redirect('/')
+
 }
 
 async function actualizar(req, res) {

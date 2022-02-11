@@ -2,9 +2,11 @@ const express = require('express')
 const session = require('express-session')
 const cluster = require('cluster')
 const compression = require('compression')
-const {logger} = require('./logger')
+const { logger } = require('./logger')
 
-
+/**************************************************************************************** */
+const dotenv = require('dotenv');
+dotenv.config()
 /**************************************************************************************** */
 
 const yargs = require('yargs/yargs')(process.argv.slice(2))
@@ -59,7 +61,7 @@ if (args.mode === 'cluster' && cluster.isPrimary) {
     const io = new IOServer(httpServer)
 
     require("./api/socket").getInstancia(io)
-    
+
 
     /**************************************************************************************** */
     const { apiProductos } = require("./routes/apiProductos")

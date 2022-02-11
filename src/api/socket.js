@@ -1,6 +1,6 @@
 
 const normalizr = require("normalizr")
-const productos = require("./Productos").getInstancia()
+const productos = require("./Productos")
 
 /**************************************************************************************** */
 const Chat = require('../api/Chat')
@@ -43,16 +43,16 @@ class mySocket{
             /* Envio los mensajes al cliente que se conectó */
             socket.emit('mensajes', mensajes_normal)
 
-            const produc = await productos.listarTodo();
+            const produc = await productos.listar();
             socket.emit('productos', produc)
 
             /* Escucho los mensajes enviado por el cliente y se los propago a todos */
             socket.on('nuevoMensaje', async data => {
-console.log('nuevoMensaje')
+
                 mensajes = await chat.AddMensaje(data)
-console.log(mensajes)
+
                 const mensajes_normal = normalizr.normalize(mensajes, mensajes_schema)
-console.log(mensajes_normal)
+
 
                 this.io.sockets.emit('mensajes', mensajes_normal)
             })
@@ -61,7 +61,7 @@ console.log(mensajes_normal)
             socket.on('nuevoProducto', async prd => {
 
                 await productos.insertar(prd)
-                const listado = await productos.listarTodo();
+                const listado = await productos.listar();
                 console.log(listado)
                 this.io.sockets.emit('productos', listado)
 

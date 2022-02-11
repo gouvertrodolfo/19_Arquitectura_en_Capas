@@ -6,6 +6,7 @@ const {database} = require("../../../options/mongoDB");
 const stringConection = database.url.replace('<username>', process.env.MONGO_DB_USER).replace('<password>', process.env.MONGO_DB_PASSWORD)
 
 
+
 class Mongo {
 
     constructor( collection) {

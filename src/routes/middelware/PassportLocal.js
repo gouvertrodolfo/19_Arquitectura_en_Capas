@@ -1,12 +1,12 @@
 const passport = require('passport');
-const { Strategy  } = require('passport-local');
+const { Strategy } = require('passport-local');
 
-const {SignUp, login} = require('../../controller/login.js');
-const {buscar} =require('../../controller/usuarios.js')
+const { SignUp, login } = require('../../controller/login.js');
+const { buscar } = require('../../controller/usuarios.js')
 
-passport.use('signup', new Strategy({ passReqToCallback: true},  SignUp ))
+passport.use('signup', new Strategy({ passReqToCallback: true }, SignUp))
 
-passport.use('login', new Strategy( login ));
+passport.use('login', new Strategy(login));
 
 
 passport.serializeUser(function (user, done) {
@@ -14,18 +14,34 @@ passport.serializeUser(function (user, done) {
 });
 
 passport.deserializeUser(async function (username, done) {
-  const usuario = await buscar( username)
+  const usuario = await buscar(username)
   done(null, usuario);
 });
 
 
-function isAuth(req, res, next) {
-    if (req.isAuthenticated()) {
-      next()
-    } else {
-      res.status(401).json({error: 'Acceso no autorizado'})
-    }
+function mwdIsAuth(req, res, next) {
+  if (req.isAuthenticated()) {
+    next()
+  } else {
+    res.status(401).json({ error: 'Acceso no autorizado' })
   }
+}
 
+function mwdIsAuthweb(req, res, next) {
+  if (req.isAuthenticated()) {
+    next()
+  } else {
+    res.redirect("/login");
+  }
+}
 
-module.exports = { passport, isAuth };
+function mwdIsAdmin(req, res, next) {
+  if (!req.user.admin) {
+    res.status(401).json({ error: 'ruta no autorizada' })
+  }
+  else {
+    next()
+  }
+}
+
+module.exports = { passport, mwdIsAuth, mwdIsAuthweb, mwdIsAdmin };

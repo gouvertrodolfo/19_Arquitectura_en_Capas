@@ -1,8 +1,8 @@
 // const sqlite = require('./mensajes/sqlite')
-const mongoDB = require('../daos/contenedores/Mongo')
+const mongoDB = require('../daos/Clientes/Mongo')
 
 const moment = require('moment')
-const contenedor = require('../daos/ContenedorMensajes')
+const contenedor = require('../daos/Mensajes')
 
 
 class Chat {

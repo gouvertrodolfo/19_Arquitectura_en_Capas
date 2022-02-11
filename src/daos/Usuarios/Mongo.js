@@ -1,4 +1,4 @@
-const Contenedor = require('../contenedores/Mongo.js');
+const Contenedor = require('../Clientes/Mongo.js');
 const { logger } = require('../../logger.js')
 
 class Mongo extends Contenedor {
